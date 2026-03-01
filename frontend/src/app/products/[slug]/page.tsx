@@ -8,8 +8,30 @@ import { useCartStore } from '@/store/cartStore';
 import { Product } from '@/types';
 import { Loader2, ShoppingBag, Heart, ShieldCheck, Truck } from 'lucide-react';
 import { clsx } from 'clsx';
+import { Metadata } from 'next';
+import { getProduct } from '@/lib/api/products';
+
+type Props = {
+  params: { slug: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  try {
+    const product = await getProduct(params.slug);
+    return {
+      title: `${product.name} | Vastraya`,
+      description: product.description,
+      openGraph: {
+        images: [product.images[0]],
+      },
+    };
+  } catch (e) {
+    return { title: 'Product Not Found | Vastraya' };
+  }
+}
 
 export default function ProductDetailPage() {
+
   const { slug } = useParams();
   const { data: product, isLoading } = useProduct(slug as string);
   const [selectedSize, setSelectedSize] = useState<string>('');

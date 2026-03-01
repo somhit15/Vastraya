@@ -72,7 +72,7 @@ async def get_product(slug: str, db: Databases = Depends(get_databases)):
     result = db.list_documents(
         database_id=settings.APPWRITE_DATABASE_ID,
         collection_id=settings.APPWRITE_PRODUCTS_COLLECTION_ID,
-        queries=[Query.equal("slug", slug), Query.limit(1)]
+        queries=[AppwriteQuery.equal("slug", slug), AppwriteQuery.limit(1)]
     )
     if not result['documents']:
         raise HTTPException(status_code=404, detail="Product not found")

@@ -25,8 +25,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Root endpoint
+@app.get("/")
+async def root():
+    return {"message": "Vastraya API is running"}
+
 # Health check endpoint
-@app.get("/api/v1/health", tags=["health"])
+@app.get("/health", tags=["health"])
 async def health_check(db: Databases = Depends(get_databases)):
     try:
         # Check database connection by listing collections
