@@ -1,0 +1,9 @@
+Generate admin dashboard for Vastraya.
+
+Requirements:
+- JWT login
+- Product management table
+- Add/edit/delete product
+- Image upload to Supabase storage
+- Protected routes
+- Clean minimal UI

@@ -1,0 +1,49 @@
+Build the complete FastAPI backend for Vastraya based on the architecture
+defined in Phase 1. This must be production-ready, async, and modular.
+
+
+PROJECT STRUCTURE TO GENERATE:
+  backend/
+  ├── main.py                 (app entry, CORS, router registration)
+  ├── config.py               (settings from env vars via pydantic-settings)
+  ├── database.py             (async SQLAlchemy engine + session)
+  ├── models/
+  │   ├── product.py
+  │   ├── category.py
+  │   └── admin.py
+  ├── schemas/
+  │   ├── product.py          (Pydantic v2 request/response schemas)
+  │   ├── category.py
+  │   └── auth.py
+  ├── routers/
+  │   ├── products.py
+  │   ├── categories.py
+  │   └── auth.py
+  ├── services/
+  │   ├── auth_service.py     (JWT create/verify, password hashing)
+  │   └── storage_service.py  (Supabase image upload)
+  └── middleware/
+      └── auth_middleware.py  (JWT dependency for protected routes)
+
+
+TECHNICAL REQUIREMENTS:
+  - Python 3.11+, FastAPI, SQLAlchemy 2.x async ORM
+  - Pydantic v2 schemas with proper validators
+  - Supabase PostgreSQL (asyncpg driver)
+  - JWT auth using python-jose, bcrypt for passwords
+  - Pagination: ?page=1&limit=20 on all list endpoints
+  - Filtering: ?category_slug=kurtas&featured=true&search=blue
+  - CORS: allow origins from env var (frontend URL)
+  - Full CRUD for products and categories
+  - Admin-only routes protected by JWT dependency
+  - Image upload endpoint that saves to Supabase Storage
+    and returns the public URL
+  - GET /health endpoint returning {status: ok, db: connected}
+  - Proper HTTP status codes and error messages
+
+
+OUTPUT: Complete Python code for every file listed above.
+Include requirements.txt and a .env.example.
+Add inline comments for non-obvious logic.
+Do not use placeholder code — write full implementations.
+

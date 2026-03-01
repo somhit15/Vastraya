@@ -1,0 +1,53 @@
+You are architecting 'Vastraya', a production-ready mobile-first Indian clothing
+e-commerce store for a semi-urban market.
+
+
+TECH STACK:
+  - Frontend: Next.js 14 (App Router, TypeScript, Tailwind CSS) → Vercel
+  - Backend:  FastAPI (Python 3.11+, async, SQLAlchemy ORM) → Render
+  - Database: Supabase PostgreSQL + Supabase Storage (for images)
+  - State:    Zustand (cart only, no server-side cart)
+  - Auth:     JWT (admin panel only — no user accounts)
+  - Checkout: WhatsApp redirect (absolutely no payment gateway)
+
+
+DELIVERABLES — Generate ALL of the following:
+
+
+1. MONOREPO FOLDER STRUCTURE
+   vastraya/
+   ├── frontend/          (Next.js app)
+   ├── backend/           (FastAPI app)
+   ├── shared/            (shared types if any)
+   └── README.md
+   Show full directory tree with file names, not just folders.
+
+
+2. DATABASE SCHEMA (PostgreSQL/Supabase)
+   Tables: categories, products, admin_users
+   - categories: id, name, slug, image_url, created_at
+   - products: id, name, slug, description, price, sale_price,
+               sizes (array), category_id (FK), images (array),
+               stock_status, is_featured, created_at, updated_at
+   - admin_users: id, username, hashed_password, created_at
+   Provide CREATE TABLE SQL with proper indexes and constraints.
+
+
+3. API ENDPOINT MAP
+   List every endpoint with: METHOD /path -> description
+   Include: products CRUD, categories CRUD, admin auth,
+   filtering/pagination, image upload, health check
+
+
+4. COMPONENT ARCHITECTURE
+   List all frontend components in a tree structure.
+   Group into: Layout, Pages, Product, Cart, Admin, Shared/UI
+
+
+5. ENVIRONMENT VARIABLES LIST
+   Provide .env.example for both frontend and backend.
+
+
+Output everything as structured markdown with clear section headers.
+Be specific — this document will guide 7 more build prompts.
+

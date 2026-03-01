@@ -1,0 +1,10 @@
+Prepare Vastraya for production.
+
+Include:
+- SEO optimization
+- Dynamic metadata
+- Sitemap
+- Image optimization
+- Deployment instructions for Vercel and Render
+- Environment variable setup
+- Performance improvements

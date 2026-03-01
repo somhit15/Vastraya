@@ -1,0 +1,13 @@
+Generate Next.js App Router project structure for Vastraya.
+
+Requirements:
+- Mobile-first layout
+- Tailwind CSS
+- Layout with header and footer
+- SEO-ready metadata
+- Home page
+- Category page
+- Product detail page
+- Admin page placeholder
+
+Use clean component separation.

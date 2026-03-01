@@ -1,0 +1,71 @@
+Implement the complete cart system for Vastraya. The cart is 100% client-side.
+There is NO backend cart. Checkout is via WhatsApp message redirect.
+
+
+FILE 1: store/cartStore.ts
+  Use Zustand with persist middleware (localStorage key: 'vastraya-cart')
+  Handle SSR hydration safely (use useEffect or Zustand's skipHydration)
+
+
+  CartItem type:
+    { id: string; name: string; price: number; image: string;
+      size: string; quantity: number; slug: string }
+
+
+  Store shape:
+    items: CartItem[]
+    isOpen: boolean  (drawer open/close)
+
+
+  Actions to implement:
+    addItem(item: CartItem)
+      - If same id + same size exists: increment quantity
+      - If same id + different size: add as new entry
+    removeItem(id: string, size: string)
+    updateQuantity(id: string, size: string, quantity: number)
+      - If quantity <= 0: remove item
+    clearCart()
+    openCart() / closeCart() / toggleCart()
+
+
+  Computed (use useCartStore selectors):
+    getTotal() → number (sum of price * quantity)
+    getTotalItems() → number (sum of all quantities)
+    getWhatsAppMessage(whatsappNumber: string) → string
+      Format the message as:
+        'Hello! I want to order from Vastraya:%0A%0A
+         1. [Product Name] - Size: [S] - Qty: [2] - Rs. [499]%0A
+         2. ...%0A%0A
+         *Total: Rs. [998]*%0A%0A
+         Please confirm availability.'
+      Return as a full wa.me URL ready to open
+
+
+FILE 2: components/cart/CartIcon.tsx
+  - Shopping bag icon (Lucide or SVG)
+  - Badge showing getTotalItems() — hide when 0
+  - On click: toggleCart()
+  - Animate badge on item add (scale pulse)
+
+
+FILE 3: components/cart/CartDrawer.tsx
+  - Slide-in from right, 100% height, max-w-sm
+  - Overlay backdrop (click to close)
+  - Header: 'Your Cart' + close button + item count
+  - Empty state: friendly message + 'Continue Shopping' link
+  - Each cart item row:
+      Product image (60x80) | Name | Size chip | Price
+      Qty stepper (-/+) | Remove button
+  - Sticky footer:
+      Subtotal: Rs. [total]
+      WhatsApp Checkout button (green, full width)
+        → calls getWhatsAppMessage() and opens in new tab
+  - Smooth CSS transition (translate-x)
+  - Body scroll lock when open (use useEffect)
+
+
+IMPORTANT:
+  - Never use document.getElementById or direct DOM manipulation
+  - Test hydration: wrap persist access in typeof window check
+  - Export both the store hook AND individual action selectors
+

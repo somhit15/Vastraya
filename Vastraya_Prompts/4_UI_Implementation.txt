@@ -1,0 +1,15 @@
+Implement UI components for Vastraya based on a simple modern Indian clothing store design.
+
+Requirements:
+- Hero section
+- Category grid
+- Product card component
+- Product listing page
+- Product detail page
+- Clean typography
+- WhatsApp green CTA
+- Bold pricing
+- Mobile-first layout
+
+Use reusable Tailwind components.
+Avoid inline styles.

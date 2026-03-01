@@ -1,0 +1,44 @@
+We have created UI design in Google Stitch for Vastraya.
+
+Design details:
+
+Color palette:
+Primary: Deep maroon
+Accent: Warm orange
+CTA: WhatsApp green
+Background: Off-white
+
+Layout structure:
+
+Home page:
+- Header with logo and cart icon
+- Hero banner
+- Category grid (3 cards)
+- Featured products grid (2-column mobile)
+- Trust badges
+- Footer
+
+Product page:
+- Large product image
+- Bold price
+- Size selector buttons
+- Add to Cart button
+- WhatsApp button
+- Related products
+
+Cart:
+- Slide-in right drawer
+- Thumbnail + name + size
+- Quantity selector
+- Subtotal
+- WhatsApp checkout button
+
+Implement this design in Next.js using Tailwind CSS.
+
+Requirements:
+- Mobile-first
+- Reusable components
+- No inline styles
+- Clean spacing system
+- Consistent typography
+- Production-ready code

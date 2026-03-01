@@ -1,0 +1,60 @@
+Connect the Next.js frontend to the FastAPI backend with a clean,
+production-ready API abstraction layer.
+
+
+FILE 1: lib/api/client.ts — Base Axios instance
+  - Create axios instance with baseURL from NEXT_PUBLIC_API_URL
+  - Default headers: Content-Type: application/json
+  - Request interceptor: attach JWT token from localStorage if present
+    (for admin routes only)
+  - Response interceptor:
+      Success: return response.data directly
+      Error 401: clear token, redirect to /admin/login
+      Error 4xx/5xx: throw ApiError with message and status
+  - Add request timeout: 10 seconds
+
+
+FILE 2: lib/api/products.ts
+  export async function getProducts(params?: {
+    page?: number; limit?: number;
+    category?: string; featured?: boolean; search?: string
+  }): Promise<PaginatedResponse<Product>>
+
+
+  export async function getProduct(slug: string): Promise<Product>
+  export async function createProduct(data: ProductFormData): Promise<Product>
+  export async function updateProduct(id: string, data: ProductFormData): Promise<Product>
+  export async function deleteProduct(id: string): Promise<void>
+
+
+FILE 3: lib/api/categories.ts
+  export async function getCategories(): Promise<Category[]>
+  export async function createCategory(data: FormData): Promise<Category>
+  (similar pattern to products)
+
+
+FILE 4: hooks/useProducts.ts — React Query or SWR hook
+  - useFeaturedProducts() → { products, isLoading, error }
+  - useProducts(filters) → { products, isLoading, error, totalPages }
+  - useProduct(slug) → { product, isLoading, error }
+  - Prefer React Query (TanStack Query) for caching
+
+
+FILE 5: hooks/useCategories.ts
+  - useCategories() → { categories, isLoading, error }
+
+
+ERROR HANDLING PATTERN:
+  - Create types/api.ts with ApiError, PaginatedResponse<T> types
+  - All API errors must surface user-friendly messages
+  - Never expose raw axios errors to the UI
+
+
+ENV VARS NEEDED:
+  NEXT_PUBLIC_API_URL=http://localhost:8000  (dev)
+  NEXT_PUBLIC_WHATSAPP_NUMBER=91XXXXXXXXXX
+
+
+Also update all existing page components to use these hooks
+instead of hardcoded mock data.
+
